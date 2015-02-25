@@ -1,5 +1,5 @@
 import pygame
-from constants import *
+import constants as const
 
 class Wall(pygame.sprite.Sprite):
 	# WALL
@@ -10,8 +10,8 @@ class Wall(pygame.sprite.Sprite):
 		super(Wall, self).__init__()
 		
 		# make blue wall
-		self.image = pygame.Surface((TILE_SIZE, TILE_SIZE))
-		self.image.fill((BRN))
+		self.image = pygame.Surface((const.TILE_SIZE, const.TILE_SIZE))
+		self.image.fill((const.BRN))
 		
 		# set location
 		self.rect = self.image.get_rect()

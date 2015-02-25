@@ -2,7 +2,6 @@ import pygame, random
 from weapon import Weapon
 from expreward import EXPReward
 from treasure import Treasure
-from constants import *
 
 class Combat(object):
 	# combat and damage handler

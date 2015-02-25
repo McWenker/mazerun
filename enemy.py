@@ -1,6 +1,5 @@
-import pygame
-from constants import *
-import random
+import pygame, random
+import constants as const
 from util.perlin import SimplexNoise
 
 perlin = SimplexNoise(period=500)
@@ -18,13 +17,13 @@ class Enemy(pygame.sprite.Sprite):
 		super(Enemy, self).__init__()
 		
 		# set height/width
-		self.image = pygame.Surface((TILE_SIZE,TILE_SIZE))
-		self.image.fill(GUI_GRN)
+		self.image = pygame.Surface((const.TILE_SIZE,const.TILE_SIZE))
+		self.image.fill(const.GUI_GRN)
 		self.image.convert()
 		
 		# set location
 		self.display_rect = self.image.get_rect()
-		self.rect = pygame.Rect(0,0,TILE_SIZE-8,TILE_SIZE-8)
+		self.rect = pygame.Rect(0,0,const.TILE_SIZE-8,const.TILE_SIZE-8)
 		self.display_rect.centerx = self.rect.centerx
 		self.display_rect.centery = self.rect.centery
 		self.health = 30

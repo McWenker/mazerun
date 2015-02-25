@@ -1,71 +1,42 @@
-import pygame
-import GUI_environment
-from constants import *
+import pygame, GUI_environment
+import constants as const
 from pygame.locals import *
 
 class Screen(object):
 
 	def __init__(self):
-		self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT], pygame.NOFRAME+pygame.DOUBLEBUF, 32)
-		self.mapSurf = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT),pygame.HWSURFACE + pygame.SRCALPHA)
-		self.GUISurf = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT),pygame.HWSURFACE + pygame.SRCALPHA)
-		self.menuSurf = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT),pygame.HWSURFACE + pygame.SRCALPHA)
-		self.spriteSurf = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT),pygame.HWSURFACE + pygame.SRCALPHA)
+		self.screen = pygame.display.set_mode([const.SCREEN_WIDTH,const.SCREEN_HEIGHT],
+			pygame.NOFRAME+pygame.DOUBLEBUF,32)
+		self.mapSurf = pygame.Surface((const.SCREEN_WIDTH,const.SCREEN_HEIGHT),
+			pygame.HWSURFACE + pygame.SRCALPHA)
+		self.GUISurf = pygame.Surface((const.SCREEN_WIDTH,const.SCREEN_HEIGHT),
+			pygame.HWSURFACE + pygame.SRCALPHA)
+		self.menuSurf = pygame.Surface((const.SCREEN_WIDTH,const.SCREEN_HEIGHT),
+			pygame.HWSURFACE + pygame.SRCALPHA)
+		self.spriteSurf = pygame.Surface((const.SCREEN_WIDTH,const.SCREEN_HEIGHT),
+			pygame.HWSURFACE + pygame.SRCALPHA)
 		self.bgcolor = Color(0,0,0,0);
 		
 		pygame.display.set_caption('ROUGELICK')
-		self.font = pygame.font.SysFont(None, 48)
-		self.small_font = pygame.font.SysFont(None, 20)
-		self.GUI_ = GUI_environment.GUI(self.GUISurf)
-		#self.draw_inventory()
-		#self.draw_equipment()
-		#self.update()
+		self.font = pygame.font.SysFont(None,20)
+		self.small_font = pygame.font.SysFont(None,20)
+		self.GUI_ = GUI_environment.GUI(self.GUISurf,self.small_font)
 		pygame.display.flip()
 
 	def to_screen(self, drawing, destination):
 		drawing.draw(destination)
 
-	'''def draw_alert(self, alert, color=BLK):
+	# OUTDATED DRAWING FUNCTIONS
+	# MUST BE UPDATED WITH NEW GUI LOGIC
+
+	def draw_alert(self, alert, color=const.GUI_WHT):
 		# draws alert box
-		self.alert = self.font.render('xxx', True, BLK, BLK)
-		self.GUISurf.blit(self.alert, (0, 790))
-		try:
-			pygame.display.flip()
-		except:
-			pass
-		self.alert = self.font.render(alert, True, color, BLK)
-		self.GUISurf.blit(self.alert, (0, 790))
+		self.alert = self.font.render(alert,True,color)
+		self.GUISurf.blit(self.alert,(5,const.SCREEN_HEIGHT-100))
 		pygame.display.flip()
 		
-	def draw_stats(self, player_stats, color=WHT):
-		# renders player stats
-		self.GUISurf.blit(self.stats_screen, (750, 0))
-		self.stats_screen = self.small_font.render(player_stats.name, True, color, BLK)
-		self.GUISurf.blit(self.stats_screen, (750, 0))
-		self.stats_screen = self.small_font.render('Level: {}'.format(player_stats.level), True, color, BLK)
-		self.GUISurf.blit(self.stats_screen, (750, 15))
-		self.stats_screen = self.small_font.render('EXP: {}'.format(player_stats.EXP), True, color, BLK)
-		self.GUISurf.blit(self.stats_screen, (750, 30))
-		self.stats_screen = self.small_font.render('HP: {}/{}'.format((player_stats.current_hp), (player_stats.max_hp)), True, color, BLK)
-		self.GUISurf.blit(self.stats_screen, (750, 45))
-		self.stats_screen = self.small_font.render('M. Damage: {}'.format(player_stats.melee_damage()), True, color, BLK)
-		self.GUISurf.blit(self.stats_screen, (750, 60))
-		self.stats_screen = self.small_font.render('R. Damage: {}'.format(player_stats.ranged_damage()), True, color, BLK)
-		self.GUISurf.blit(self.stats_screen, (750, 75))
-		line = 90
-		for stat in STATS:
-			if hasattr(player_stats, stat):
-				s = str(getattr(player_stats, stat))
-			else:
-				s = str(player_stats.stats[stat])
-				
-				self.stats_screen = self.small_font.render('{}: {}'.format(stat, s), True, color, BLK)
-				self.GUISurf.blit(self.stats_screen, (750, line))
-				line += 15
-		self.stats_screen = self.small_font.render('Armor: {}'.format(player_stats.armor()), True, color, BLK)
-		self.GUISurf.blit(self.stats_screen, (750, line))
 		
-	def draw_gold(self, gold_count):
+	'''def draw_gold(self, gold_count):
 		# renders gold
 		self.GUISurf.blit(self.gold_screen, (750, 385))
 		self.gold = self.small_font.render(str(gold_count), True, WHT, BLK)

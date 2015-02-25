@@ -1,6 +1,5 @@
 import pygame
-
-from constants import *
+import constants as const
 
 class EXPReward(pygame.sprite.Sprite):
 	def __init__(self, x, y, reward):
@@ -19,6 +18,6 @@ class EXPReward(pygame.sprite.Sprite):
 
 	def get_image(self, reward):
 		if reward == 25:
-			return pygame.image.load(IMG_DIR + '25EXP.png')
+			return pygame.image.load(const.IMG_DIR + '25EXP.png')
 		if reward == 50:
-			return pygame.image.load(IMG_DIR + '50EXP.png')
+			return pygame.image.load(const.IMG_DIR + '50EXP.png')

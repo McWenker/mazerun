@@ -1,5 +1,5 @@
 import pygame, random, sys
-from constants import *
+import constants as const
 from gamemap import GameMap
 from room import Room
 from wall import Wall
@@ -87,16 +87,7 @@ class Game(object):
 	def add_treasure(self, treasure):
 		text = 'You found %s. %s' % (treasure.title, treasure.desc)
 		self.inventory.add_to_inventory(treasure, self.player)
-	#	self.screen.draw_alert(text)
-
-	def blit_alpha(self, target, source, location, opacity):
-		x = location[0]
-		y = location[1]
-		temp = pygame.Surface((source.get_width(), source.get_height())).convert()
-		temp.blit(target, (-x, -y))
-		temp.blit(source, (0, 0))
-		temp.set_alpha(opacity)        
-		target.blit(temp, location)
+		self.screen.draw_alert(text)
 		
 	def keyboardDown(self, evt):
 		if evt.key == pygame.K_ESCAPE:
@@ -180,19 +171,20 @@ class Game(object):
 	
 	def gameplay_viewerUpdate(self, screen):
 		# updates visual elements
-		screen.screen.fill(BLK)
+		screen.screen.fill(const.BLK)
 		
 		screen.spriteSurf.fill(screen.bgcolor);
 		screen.GUISurf.fill(screen.bgcolor);
 
 
 		if self.game_state == 'RUNNING':	
-			screen.to_screen(self.current_room.enemy_list, screen.spriteSurf)
-			screen.to_screen(self.current_room.treasure_list, screen.spriteSurf)
-			screen.to_screen(self.expReward_list, screen.spriteSurf)
-			screen.to_screen(self.weapon_list, screen.spriteSurf)
-			screen.to_screen(self.player_list, screen.spriteSurf)
-			screen.GUI_.render()
+			screen.to_screen(self.current_room.enemy_list,screen.spriteSurf)
+			screen.to_screen(self.current_room.treasure_list,screen.spriteSurf)
+			screen.to_screen(self.expReward_list,screen.spriteSurf)
+			screen.to_screen(self.weapon_list,screen.spriteSurf)
+			screen.to_screen(self.player_list,screen.spriteSurf)
+			screen.GUI_.render()			
+			screen.GUI_.draw_stats(self.player)
 
 		
 		screen.update()
@@ -203,12 +195,12 @@ class Game(object):
 	
 		m.move(self.current_room.wall_list)
 		enemy_hit_player = pygame.sprite.spritecollide(self.player,
-								self.current_room.enemy_list, False)
+								self.current_room.enemy_list,False)
 
 		for enemy in enemy_hit_player:
 			# deal damage to player
 			if self.invuln_count == 0:
-				self.player.take_damage(enemy.damage, enemy.rect.x, enemy.rect.y)
+				self.player.take_damage(enemy.damage,enemy.rect.x,enemy.rect.y)
 				self.invuln_count = 1000
 				if self.player.health <= 0:
 					pass
@@ -217,7 +209,7 @@ class Game(object):
 	
 	def lootLogic(self, l):
 		treasure_picked_up = pygame.sprite.spritecollide(self.player,
-						self.current_room.treasure_list, True)
+						self.current_room.treasure_list,True)
 
 		for treasure in treasure_picked_up:
 			# pick up loot!

@@ -1,6 +1,5 @@
-import pygame
-import random
-from constants import *
+import pygame, random
+import constants as const
 
 class Weapon(pygame.sprite.Sprite):
 	# BULLET BILL/SWADIAN SWAD
@@ -18,7 +17,7 @@ class Weapon(pygame.sprite.Sprite):
 		self.rect.y = y
 
 	def get_shape(self, shape):
-		return pygame.image.load(IMG_DIR+self.name+' '+shape+'.png')
+		return pygame.image.load(const.IMG_DIR+self.name+' '+shape+'.png')
 		
 
 	def move(self):

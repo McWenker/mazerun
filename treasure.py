@@ -1,5 +1,5 @@
 import pygame, random
-from constants import *
+import constants as const
 
 class Treasure(pygame.sprite.Sprite):
 	# treasure class, for money too
@@ -31,30 +31,30 @@ class Treasure(pygame.sprite.Sprite):
 			self.title = 'Greatsword'
 			self.m_damage = 5
 			self.agi_buff = -1
-			self.image = pygame.image.load(IMG_DIR + 'swadia up.png')
+			self.image = pygame.image.load(const.IMG_DIR + 'swadia up.png')
 		elif choice < 60:
 			self.item_type = 'Hat'
 			self.title = 'Iron Helm'
 			self.armor = 2
 			self.agi_buff = -1
 			self.int_buff = -1
-			self.image = pygame.image.load(IMG_DIR + 'helm.png')
+			self.image = pygame.image.load(const.IMG_DIR + 'helm.png')
 		elif choice < 80:
 			self.item_type = 'Hat'
 			self.title = 'Fool\'s Crown'
 			self.str_buff = 1
 			self.int_buff = -1
-			self.image = pygame.image.load(IMG_DIR + 'crown.png')
+			self.image = pygame.image.load(const.IMG_DIR + 'crown.png')
 		elif choice <= 100:
 			self.item_type = 'R. Weapon'
 			self.title = 'Apprentice Wand'
 			self.r_damage = 4
 			self.str_buff = -1
 			self.int_buff = 1
-			self.image = pygame.image.load(IMG_DIR + 'wand.png')
+			self.image = pygame.image.load(const.IMG_DIR + 'wand.png')
 
 	def coin_image(self, c):
 		if c > 15:
-			return pygame.image.load(IMG_DIR + 'gold_tiny.png')
+			return pygame.image.load(const.IMG_DIR + 'gold_tiny.png')
 		elif c < 50:
-			return pygame.image.load(IMG_DIR + 'gold_small.png')
+			return pygame.image.load(const.IMG_DIR + 'gold_small.png')

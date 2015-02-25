@@ -1,6 +1,6 @@
 import pygame, random
+import constants as const
 from util.perlin import SimplexNoise
-from constants import *
 from treasure import Treasure
 
 perlin = SimplexNoise(period=500)
@@ -19,23 +19,24 @@ class Player(pygame.sprite.Sprite):
 		
 		# set height/width
 		#self.image = pygame.image.load(IMG_DIR + 'new dude.png')
-		self.image = pygame.Surface((TILE_SIZE,TILE_SIZE))
-		self.image.fill(GUI_RED)
+		self.image = pygame.Surface((const.TILE_SIZE,const.TILE_SIZE))
+		self.image.fill(const.GUI_RED)
 		self.image.convert()
 		
 		# set location
 		self.display_rect = self.image.get_rect()
-		self.rect = pygame.Rect(TILE_SIZE,TILE_SIZE,TILE_SIZE,TILE_SIZE)
+		self.rect = pygame.Rect(const.TILE_SIZE,const.TILE_SIZE,const.TILE_SIZE-4,
+			const.TILE_SIZE-4)
 		self.rect.y = y
 		self.rect.x = x
-		self.display_rect.y = self.rect.y
-		self.display_rect.x = self.rect.x
+		self.display_rect.centery = self.rect.centery
+		self.display_rect.centerx = self.rect.centerx
 		self.health = health
 		self.gold = 0
 		self.inventory = []
 		self.equipped = {}
 
-		for treasure in EQUIPMENT_TYPES:
+		for treasure in const.EQUIPMENT_TYPES:
 			self.equipped[treasure] = None
 
 		# set stats
@@ -54,7 +55,7 @@ class Player(pygame.sprite.Sprite):
 				'EXP': 0
 		}
 		
-		self.current_hp = 100
+		self.current_hp = self.max_hp
 		#self.main_stat = self.find_main_stat(self.class_type)
 		self.name = 'Rougelicker'
 		

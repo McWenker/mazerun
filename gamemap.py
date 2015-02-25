@@ -1,6 +1,5 @@
-import pygame, constants
+import pygame
 from room import Room
-from individual_rooms import *
 
 class GameMap(object):
 	# map, for storing room objects and their attribs

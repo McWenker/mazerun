@@ -17,7 +17,7 @@ GUI_GRN = (45,153,70)
 SCREEN_WIDTH = 1024
 SCREEN_HEIGHT = 768
 ROWS = 32
-COLUMNS = 22
+COLUMNS = 21
 MAX_CHAMBERS = 7
 
 EQUIPMENT_TYPES = ('Hat', 'Torso', 'Legs', 'Feet', 'Back', 'Neck', 'Hands', 'M. Weapon', 'R. Weapon')

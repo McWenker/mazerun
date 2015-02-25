@@ -1,14 +1,8 @@
-import pygame, math, sys, random
+import pygame, sys
 from pygame.locals import *
 
 sys.path.append('roguey\classes')
 
-from constants import *
-from treasure import Treasure
-from gamemap import GameMap
-from player import Player
-from enemy import Enemy
-from inventory import Inventory
 from game import Game
 
 def main():
